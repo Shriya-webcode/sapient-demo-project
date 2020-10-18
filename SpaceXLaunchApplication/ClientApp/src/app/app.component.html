@@ -1,0 +1,155 @@
+<style>
+  .widget-box {
+    padding: 0;
+    box-shadow: none;
+    margin: 3px 0;
+    border: 1px solid #CCC;
+    border-color: #5a5a5a;
+    background-color: white;
+  }
+  .widget-header {
+    margin-top:10%;
+    
+  }
+  .widget-main {
+    margin-bottom: 10%;
+  }
+
+  .widget-header-padding {
+    padding-left: 20%;
+    padding-bottom: 8%;
+  }
+  .widget-body-padding {
+    padding-left: 20%;
+    font-size: larger;
+  }
+  .blue {
+    color:blue;
+  }
+  .darkBlue {
+    color: darkblue;
+  }
+  .bold {
+    font-weight: bold;
+  }
+  
+</style>
+<div class="page-content">
+
+  <div class="page-header">
+    <h1>
+      SpaceX Launch Programs
+    </h1>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="row">
+
+        <div class="col-xs-12 col-sm-3">
+
+            <div class="widget-box ">
+              <div class="widget-header">
+                <h3 class="bold ">Filter</h3>
+              </div>
+
+              <div class="widget-body">
+                <div class="widget-main" style="margin-right: 10%;margin-left: 10%;">
+                  <h5 class="header bold smaller text-center">Launcher</h5>
+                  <hr>
+
+                  <div class="row">
+                    <ng-container *ngFor="let year of yearList">
+
+                      <div class="col-xs-6">
+                        <a class="btn btn-block btn-success" (click)="getFilterData('year',year)">
+                          <span>{{year}}</span>
+                        </a>
+                      </div>
+                    </ng-container>
+                  </div>
+
+                  <h5 class="header smaller bold    text-center">Successful Launch</h5>
+                  <hr>
+
+                  <div class="row">
+                    <div class="col-xs-6">
+                      <a (click)="getFilterData('launch',true)" class="btn btn-block btn-success">
+                        <span>True</span>
+                      </a>
+                    </div>
+                    <div class="col-xs-6">
+                      <a   (click)="getFilterData('launch',false)"  class="btn btn-block btn-success">
+                        <span>False</span>
+                      </a>
+                    </div>
+
+                  </div>
+
+                  <h5 class="header smaller  bold   text-center">Successful Landing</h5>
+                  <hr>
+                  <div class="row">
+                    <div class="col-xs-6">
+                      <a (click)="getFilterData('land',true)" class="btn btn-block btn-success">
+                        <span>True</span>
+                      </a>
+                    </div>
+                    <div class="col-xs-6">
+                      <a  (click)="getFilterData('land',false)" class="btn btn-block btn-success">
+                        <span>False</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+
+
+            </div>
+
+          </div>
+
+
+        <ng-container *ngFor="let detail of filterData">
+
+              <div class="col-xs-12 col-sm-3">
+                <div class="widget-box ">
+                  <div class="widget-header widget-header-padding">
+                    <img src="{{detail.links.mission_patch}}" class="img-responsive" style=" height: 200px; width: auto;">
+                    <h3 class="darkBlue bold">{{detail.mission_name}}  #{{detail.flight_number}}</h3>
+                  </div>
+
+                  <div class="widget-body widget-body-padding" >
+                    <div class="widget-main"  >
+                      <div class="row">
+                        <span class="bold">Mission Id : </span>
+                        <span class="blue"> </span>
+                      </div>
+                      <div class="row">
+                        <span class="bold">launch Year : </span>
+                        <span class="blue">{{detail.launch_year}}</span>
+                      </div>
+                      <div class="row">
+                        <span class="bold">Successfull Launch : </span><span class="blue">{{detail.launch_success}}</span>
+                      </div>
+                      <div class="row">
+                        <span class="bold">Successfull Land : </span><span class="blue">{{detail.rocket.first_stage.cores[0].land_success}}</span>
+                      </div>
+
+
+                    </div>
+                  </div>
+
+
+                </div>
+              </div>
+
+        </ng-container>
+
+
+
+        </div>
+      </div>
+  </div>
+</div>
